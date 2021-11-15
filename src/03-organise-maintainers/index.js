@@ -55,30 +55,24 @@ module.exports = async function organiseMaintainers() {
 
   // For Each Package
   await packages.forEach(pack => {
-    // Get maintainers
-    const packageMantainers = pack.package.maintainers.map(
-      maintainer => maintainer.username,
-    );
-
     // For Each Mantainer
-    packageMantainers.forEach(maintainerName => {
-
+    pack.package.maintainers.forEach(maintainer => {
+      // // Is current maintainer the maintainers list?
       let currentMantainer = maintainers.filter(
-        item => item.username === maintainerName,
+        item => item.username === maintainer.username,
       );
 
-      // // Is he in the mantainer list?
       if (currentMantainer.length === 0) {
         // Not in the list add him
         maintainers.push({
-          username: maintainerName,
+          username: maintainer.username,
           packageNames: [pack.package.name],
         });
       } else {
         // He is in the list, add the package to his list
-        currentMantainer[0].packageNames.push(pack.package.name)
+        currentMantainer[0].packageNames.push(pack.package.name);
         // Sort packages
-        currentMantainer[0].packageNames.sort()
+        currentMantainer[0].packageNames.sort();
       }
     });
   });

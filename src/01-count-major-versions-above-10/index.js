@@ -40,7 +40,7 @@ module.exports = async function countMajorVersionsAbove10() {
       return_payload: true,
     },
   );
-  return response.data.content.filter(item => item.package.version.split('.')[0] > 10).length
+  return response.data.content.filter(item => +item.package.version.split('.')[0] > 10).length
 };
 
 

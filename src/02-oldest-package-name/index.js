@@ -48,6 +48,5 @@ module.exports = async function oldestPackageName() {
     return dateA > dateB ? 1 : -1;
   });
 
-  // return packages.map(element => element.package.name);
   return packages[0].package.name;
 };
